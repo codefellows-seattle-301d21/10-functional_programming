@@ -62,7 +62,7 @@ var app = app || {};
     )
   };
 
-  // TODO: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
+  // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
 
   Article.numWordsAll = () => {
     return Article.all.map(a => a.body.length).reduce((acc, cur) => acc + cur);
