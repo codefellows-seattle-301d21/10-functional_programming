@@ -48,6 +48,7 @@ var app = app || {};
     Article.all.push(new Article(ele));
   });
   */
+    rawData.map(ele => Article.all.push(new Article(ele)));
 
   };
 
@@ -62,8 +63,9 @@ var app = app || {};
   };
 
   // TODO: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
+
   Article.numWordsAll = () => {
-    return Article.all.map().reduce()
+    return Article.all.map(a => a.body.length).reduce((acc, cur) => acc + cur);
   };
 
   // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
