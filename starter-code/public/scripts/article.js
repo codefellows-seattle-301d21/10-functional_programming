@@ -83,6 +83,7 @@ var app = app || {};
       // property.
       return {
         author: author,
+        articleCount: Article.all.filter(a => a.author === author).length,
         wordCount: Article.all.filter(a => a.author === author)
                               .map(a => a.body.length)
                               .reduce((acc, cur) => acc + cur)
