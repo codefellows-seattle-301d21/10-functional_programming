@@ -164,6 +164,6 @@ var app = app || {};
     .then(console.log)
     .then(callback);
   };
-
-  module.article = Article;
+  // TODO I fixed a bug here, .article needed to be .Article
+  module.Article = Article;
 })(app);
