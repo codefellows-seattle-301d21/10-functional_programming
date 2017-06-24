@@ -44,16 +44,18 @@ var app = app || {};
     // of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
     // There is no need to push to anything.
 
-    Article.all = rawData.map(article => {
-      return {
-        title: article.title,
-        category: article.category,
-        author: article.author,
-        authorUrl: article.authorUrl,
-        publishedOn: article.publishedOn,
-        body: article.body
-      };
-    });
+    rows.map(ele => Article.all.push(new Article(ele)));
+
+    // Article.all = rawData.map(article => {  //should this rawData be changed to rows?
+    //   return {
+    //     title: article.title,
+    //     category: article.category,
+    //     author: article.author,
+    //     authorUrl: article.authorUrl,
+    //     publishedOn: article.publishedOn,
+    //     body: article.body
+    //   };
+    // });
 
     /* OLD forEach():
     rawData.forEach(function(ele) {
@@ -98,7 +100,7 @@ var app = app || {};
 
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
-      // DONE: Transform each author string into an object with properties for
+      // TODO: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
       // HINT: This .map should be setup to return an object literal with two properties.
@@ -107,7 +109,7 @@ var app = app || {};
       // property.
       return {
         author: author,
-        words: Articles.all.filter(article => article.author = author)
+        words: Articles.all.filter(article => article.author === author)
         .map(article => {
           return article.body.split(' ').length;
         }).reduce((acc, cur) => {
@@ -162,5 +164,6 @@ var app = app || {};
     .then(console.log)
     .then(callback);
   };
+
   module.article = Article;
 })(app);
