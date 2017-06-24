@@ -48,7 +48,7 @@ var app = app || {};
     Article.all.push(new Article(ele));
   });
   */
-    rawData.map(ele => Article.all.push(new Article(ele)));
+    rows.map(ele => Article.all.push(new Article(ele)));
 
   };
 
@@ -70,13 +70,7 @@ var app = app || {};
 
   // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
-  Article.allAuthors = () => {
-    return Article.all.map(a => a.author).reduce((acc, cur) => { 
-      if (!acc.includes(cur)) {
-        acc.push(cur);
-      }    
-    });
-  };
+  Article.allAuthors = () => Article.all.map(a => a.author).reduce((acc, cur) => acc.includes(cur) ? acc : acc.concat([cur]), []);
 
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
