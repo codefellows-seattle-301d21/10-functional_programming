@@ -87,7 +87,12 @@ var app = app || {};
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-
+      return {
+        author: author,
+        wordCount: Article.all.filter(a => a.author === author)
+                              .map(a => a.body.length)
+                              .reduce((acc, cur) => acc + cur)
+      };
     })
   };
 
