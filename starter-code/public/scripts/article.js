@@ -2,7 +2,7 @@
 var app = app || {};
 
 // REVIEW: Check out all of the functions that we've cleaned up with arrow function syntax.
-(function(module){
+(function(module) {
 
 
 // DONE: Wrap the contents of this file, except for the preceding 'use strict' and 'var app...' declararions, in an IIFE.
@@ -43,10 +43,12 @@ var app = app || {};
     // is the transformation of one collection into another. Remember that we can set variables equal to the result
     // of functions. So if we set a variable equal to the result of a .map, it will be our transformed array.
     // There is no need to push to anything.
-
-    let Article.all = rawData.map(ele =>{
+    rows.map(ele => Article.all.push(new Article(ele)));
+    /*
+    let this.all = rawData.map(ele =>{
       new Article(ele);
     })
+    */
     /* OLD forEach():
     rawData.forEach(function(ele) {
     Article.all.push(new Article(ele));
@@ -69,12 +71,12 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = () => {
     return Article.all.map(arti =>
-    arti.body.split('').length).reduce(function(acc, cur){
+    arti.body.split(' ').length).reduce(function(acc, cur){
       return acc + cur;
     });
   };
 
-  // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
+  // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
     return Article.all.map(arti =>
@@ -83,26 +85,29 @@ var app = app || {};
         acc.push(cur);
       }
       return acc;
-    }), [];
+    }, []);
     //solution help found on stack overflow at https://stackoverflow.com/questions/13486479/how-to-get-an-array-of-unique-values-from-an-array-containing-duplicates-in-java
   };
 
   Article.numWordsByAuthor = () => {
-    return Article.allAuthors().map(author => {
-      // TODO: Transform each author string into an object with properties for
+    return Article.allAuthors().map(author =>
+      {
+      // DONE: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
       // HINT: This .map should be setup to return an object literal with two properties.
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-      name: author,
-      totalNumWords: Article.all.filter(article => article.author === author)
-      .map(arti => arti.body.split('').length)
-      .reduce(function(acc, cur){
-        return acc + cur;
+        return {
+        name: author,
+        totalNumWords: Article.all.filter(article => article.author === author)
+        .map(arti => arti.body.split(' ').length)
+        .reduce(function(acc, cur){
+          return acc + cur;
+        })
       }
-    })
+    });
   };
 
   Article.truncateTable = callback => {
@@ -150,4 +155,5 @@ var app = app || {};
     .then(callback);
   };
 
-}),(app);
+  module.Article = Article;
+})(app);
