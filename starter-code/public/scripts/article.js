@@ -109,7 +109,7 @@ var app = app || {};
       // property.
       return {
         author: author,
-        words: Articles.all.filter(article => article.author === author)
+        words: Article.all.filter(article => article.author === author)
         .map(article => {
           return article.body.split(' ').length;
         }).reduce((acc, cur) => {
