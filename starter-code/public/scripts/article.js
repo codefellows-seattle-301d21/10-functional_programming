@@ -50,9 +50,10 @@ var app = app || {};
     Article.all.push(new Article(ele));
   });
   */
-    let Article.all = rawData.map(ele => {
-      return new Article(ele);
-    })
+    // Article.all = rows.map(ele => {
+    //   new Article(ele);
+    // });
+    rows.map(ele => Article.all.push(new Article(ele)));
   };
 
   Article.fetchAll = callback => {
@@ -65,9 +66,12 @@ var app = app || {};
     )
   };
 
-  // TODO: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
+  // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
+
   Article.numWordsAll = () => {
-    return Article.all.map().reduce()
+    return Article.all
+    .map((article) => article.body.split(' ').length)
+    .reduce((a, b) => a + b);
   };
 
   // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
@@ -133,6 +137,7 @@ var app = app || {};
     .then(console.log)
     .then(callback);
   };
+
   module.Article = Article;
 
 } (app));
