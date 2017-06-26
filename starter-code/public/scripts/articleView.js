@@ -151,7 +151,7 @@ var app = app || {};
     $('#blog-stats .words').text(app.Article.numWordsAll());
 
     app.Article.numWordsByAuthor().forEach((stat) =>
-      $('.all-authors').append(`<dd>Author: ${stat.name}</dd><dd> Words: ${stat.words}</dd>`)
+      $('.all-authors').append(` <li> ${stat.name} has written ${stat.words} words.</li>`)
     );
   };
 
