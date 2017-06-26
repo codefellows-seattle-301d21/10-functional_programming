@@ -48,7 +48,7 @@ var app = app || {};
     Article.all.push(new Article(ele));
   });
   */
-  Article.all = rawData.map(ele => new Article(ele));
+  Article.all = rows.map(ele => new Article(ele));
   };
 
   Article.fetchAll = callback => {
@@ -70,11 +70,16 @@ var app = app || {};
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
     return Article.all.map(ele => ele.author)
-    .reduce((acc, curr) => if(acc.indexOf[curr] === -1){ acc.push(curr)} return acc, []);
+    .reduce((acc, curr) => acc.indexOf[curr] === -1)
   };
 
   Article.numWordsByAuthor = () => {
-    return Article.allAuthors().map(author => { name: author, words: Article.all.filter(curr => curr.author === author).map(ele => ele.body.split(' ')).reduce((acc, item) => acc + item.length, 0);
+    return Article.allAuthors().map(author =>
+      ({ name: author,
+        words: Article.all.filter(curr => curr.author === author)
+        .map(ele => ele.body.split(' '))
+        .reduce((a, b) => a + b.length)
+      }))
       // done: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
@@ -82,8 +87,6 @@ var app = app || {};
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-
-    })
   };
 
   Article.truncateTable = callback => {
