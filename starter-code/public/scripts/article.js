@@ -74,14 +74,13 @@ var app = app || {};
     .reduce((a, b) => a + b);
   };
 
-  // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
+  // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
   Article.allAuthors = () => {
     return Article.all
     .map((article) => article.author)
     .reduce(function (allNames, name) {
       if (!allNames.includes(name)) {
-        console.log(name);
         allNames.push(name);
       }
       return allNames;
@@ -89,17 +88,25 @@ var app = app || {};
   };
 
   Article.numWordsByAuthor = () => {
-    return Article.allAuthors().map(author => {
-      // TODO: Transform each author string into an object with properties for
+    return Article.allAuthors()
+    .map((authorName) => ({ name: authorName, words:
+      Article.all
+      .filter(function(article) {
+        return article.author === authorName;
+      })
+      .map((words) => words.body.split(' ').length)
+      .reduce((a, b) => a + b)
+    })
+  );
+  };
+
+      // DONE: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
       // HINT: This .map should be setup to return an object literal with two properties.
       // The first property should be pretty straightforward, but you will need to chain
       // some combination of filter, map, and reduce to get the value for the second
       // property.
-
-    })
-  };
 
   Article.truncateTable = callback => {
     $.ajax({
