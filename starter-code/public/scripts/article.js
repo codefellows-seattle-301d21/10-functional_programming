@@ -58,7 +58,7 @@ var app = app || {};
         Article.loadAll(results);
         callback();
       }
-    )
+    );
   };
 
   // done: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
@@ -79,7 +79,7 @@ var app = app || {};
         words: Article.all.filter(curr => curr.author === author)
         .map(ele => ele.body.split(' '))
         .reduce((a, b) => a + b.length)
-      }))
+      }));
       // done: Transform each author string into an object with properties for
       // the author's name, as well as the total number of words across all articles
       // written by the specified author.
