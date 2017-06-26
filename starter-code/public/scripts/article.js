@@ -46,17 +46,6 @@ var app = app || {};
 
     rows.map(ele => Article.all.push(new Article(ele)));
 
-    // Article.all = rawData.map(article => {  //should this rawData be changed to rows?
-    //   return {
-    //     title: article.title,
-    //     category: article.category,
-    //     author: article.author,
-    //     authorUrl: article.authorUrl,
-    //     publishedOn: article.publishedOn,
-    //     body: article.body
-    //   };
-    // });
-
     /* OLD forEach():
     rawData.forEach(function(ele) {
     Article.all.push(new Article(ele));
@@ -164,6 +153,6 @@ var app = app || {};
     .then(console.log)
     .then(callback);
   };
-  // TODO I fixed a bug here, .article needed to be .Article
+  // TODO 
   module.Article = Article;
 })(app);
