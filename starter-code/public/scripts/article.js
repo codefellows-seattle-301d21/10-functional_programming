@@ -9,6 +9,7 @@ var app = app || {};
 // Where the IIFE is invoked, pass in the global 'app' object that is defined above.
 // Where the IIFE is invoked, pass in the global 'app' object that is defined above.
 (function(module) {
+
   function Article(rawDataObj) {
     /* REVIEW: In lab 8, we explored a lot of new functionality going on here. Let's re-examine
     the concept of context.
@@ -147,4 +148,4 @@ var app = app || {};
     .then(console.log)
     .then(callback);
   };
-})(window);
+})(app);
