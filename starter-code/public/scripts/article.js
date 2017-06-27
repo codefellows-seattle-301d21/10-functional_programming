@@ -48,7 +48,7 @@ var app = app || {};
     Article.all.push(new Article(ele));
   });
   */
-    rows.map(ele => Article.all.push(new Article(ele)));
+    Article.all = rows.map(r => new Article(ele));
 
   };
 
@@ -65,12 +65,12 @@ var app = app || {};
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
 
   Article.numWordsAll = () => {
-    return Article.all.map(a => a.body.length).reduce((acc, cur) => acc + cur);
+    return Article.all.map(a => a.body.split().length).reduce((acc, cur) => acc + cur);
   };
 
   // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names. You will
   // probably need to use the optional accumulator argument in your reduce call.
-  Article.allAuthors = () => Article.all.map(a => a.author).reduce((acc, cur) => acc.includes(cur) ? acc : acc.concat([cur]), []);
+  Article.allAuthors = () => Article.all.map(a => a.author).reduce((acc, cur) => acc.includes(cur) ? acc : acc.push(cur), []);
 
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
@@ -85,7 +85,7 @@ var app = app || {};
         author: author,
         articleCount: Article.all.filter(a => a.author === author).length,
         wordCount: Article.all.filter(a => a.author === author)
-                              .map(a => a.body.length)
+                              .map(a => a.body.split(' ').length)
                               .reduce((acc, cur) => acc + cur)
       };
     })
