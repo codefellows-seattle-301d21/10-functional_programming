@@ -50,10 +50,8 @@ var app = app || {};
     Article.all.push(new Article(ele));
   });
   */
-    // Article.all = rows.map(ele => {
-    //   new Article(ele);
-    // });
-    rows.map(ele => Article.all.push(new Article(ele)));
+
+    Article.all = rows.map(ele => new Article(ele));
   };
 
   Article.fetchAll = callback => {
